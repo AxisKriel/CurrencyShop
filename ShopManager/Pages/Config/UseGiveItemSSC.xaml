@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="ShopManager.Pages.Config.UseGiveItemSSC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel MinWidth="200">
+                <TextBlock Style="{StaticResource Heading2}" ><Run Text="UseGiveItemSSC"/></TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Justify"><Run Text="This will replace TShock's standard GiveItem method when delivering purchased items. By utilizing SSC technology, GiveItemSSC is able to deploy the items directly into the player's inventory instead of dropping them above the player."/></TextBlock>
+                <Line Height="10"></Line>
+                <CheckBox x:Name="checkGiveItem" Content="Enable GiveItemSSC"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

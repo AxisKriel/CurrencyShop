@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="ShopManager.Pages.Config.ItemsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:local="clr-namespace:ShopManager"
+             mc:Ignorable="d" 
+             
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="onLoad" Unloaded="onUnload">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel MinWidth="200">
+                <TextBlock Text="Items" Style="{StaticResource Heading2}" />
+                <TextBlock TextWrapping="Wrap" Text="Contains a list of items which players may purchase at the shop. Select an item from the list below or click add new to begin." />
+                <Line Height="10"/>
+                <ScrollViewer>
+                    <DataGrid Name="itemGrid" ItemsSource="{Binding Items}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn x:Name="itemGridIdColumn" Header="NetID"/>
+                            <mui:DataGridComboBoxColumn x:Name="itemGridNameColumn" ItemsSource="{Binding ItemNames}" Header="Name"/>
+                            <local:DataGridNumericColumn x:Name="itemGridStackColumn" Header="Stack"/>
+                            <local:DataGridNumericColumn x:Name="itemGridPrefixColumn" Header="Prefix"/>
+                            <local:DataGridNumericColumn x:Name="itemGridCostColumn" Header="Cost"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
