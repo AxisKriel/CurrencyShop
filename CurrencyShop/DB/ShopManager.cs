@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,13 +59,48 @@ namespace CurrencyShop.DB
 					using (QueryResult r = db.QueryReader("SELECT * FROM Items"))
 					{
 						while (r.Read())
-							inventory.Add(new SItem(r.Get<int>("NetID"), r.Get<int>("Stack"), r.Get<int>("Cost"), (byte)r.Get<int>("Prefix")));
+						{
+							try
+							{
+								inventory.Add(new SItem(r.Get<int>("NetID"), r.Get<int>("Stack"), r.Get<int>("Cost"), (byte)r.Get<int>("Prefix")));
+								count++;
+							}
+							catch (InvalidItemException e)
+							{
+								TShock.Log.ConsoleError($"currencyshop: {e.Message}");
+							}
+							catch (InvalidPrefixException e)
+							{
+								TShock.Log.ConsoleError($"currencyshop: {e.Message}");
+							}
+							catch (Exception e)
+							{
+								TShock.Log.Error($"currencyshop: {e.Message} (RowID: {r.Get<int>("ID")})");
+							}
+						}
 					}
 					kits.Clear();
 					using (QueryResult r = db.QueryReader("SELECT * FROM Kits"))
 					{
 						while (r.Read())
-							kits.Add(new Kit(r.Get<string>("Name"), r.Get<int>("Cost"), JsonConvert.DeserializeObject<SItem[]>(r.Get<string>("Items"))));
+						{
+							try
+							{
+								kits.Add(new Kit(r.Get<string>("Name"), r.Get<int>("Cost"), JsonConvert.DeserializeObject<SItem[]>(r.Get<string>("Items"))));
+							}
+							catch (InvalidItemException e)
+							{
+								TShock.Log.ConsoleError($"currencyshop: {e.Message}");
+							}
+							catch (InvalidPrefixException e)
+							{
+								TShock.Log.ConsoleError($"currencyshop: {e.Message}");
+							}
+							catch (Exception e)
+							{
+								TShock.Log.Error($"currencyshop: {e.Message} (RowID: {r.Get<int>("ID")})");
+							}
+						}
 					}
 					return count;
 				});
