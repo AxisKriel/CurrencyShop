@@ -107,15 +107,29 @@ namespace CurrencyShop
 							{
 								try
 								{
-									if (CShop.Config.UseGiveItemSSC)
-										args.Player.GiveItemSSC(item.netID, item.stack * digit, item.prefix);
-									else
-										args.Player.GiveItem(item.netID, item.GetName(), 2, 3, item.stack, item.prefix);
+									int stack = item.stack * digit;
+									int cost = item.cost * digit;
+									Item realItem = item.GetItem();
+									if (realItem.maxStack == 1 && stack > 1)
+									{
+										stack = 1;
+										cost = item.cost;
+									}
+									else if (stack > realItem.maxStack)
+									{
+										args.Player.SendErrorMessage($"{Tag} You can't buy {stack} {realItem.name} at once.");
+										return;
+									}
 
-									await BankMain.Bank.ChangeByAsync(account.AccountName, -item.cost * digit);
-									BankMain.Log.ItemPurchase(account, new SItem(item.netID, item.stack * digit, item.cost, item.prefix));
+									if (CShop.Config.UseGiveItemSSC)
+										args.Player.GiveItemSSC(item.netID, stack, item.prefix);
+									else
+										args.Player.GiveItem(item.netID, realItem.name, 2, 3, stack, item.prefix);
+
+									await BankMain.Bank.ChangeByAsync(account.AccountName, -cost);
+									BankMain.Log.ItemPurchase(account, new SItem(item.netID, stack, cost, item.prefix));
 									string prefix = item.prefix > 0 ? item.GetPrefixName() + " " : "";
-									args.Player.SendSuccessMessage($"{Tag} Bought {item.stack * digit} {prefix}{item.GetName()} for {BankMain.FormatMoney(item.cost * digit)}.");
+									args.Player.SendSuccessMessage($"{Tag} Bought {stack} {prefix}{item.GetName()} for {BankMain.FormatMoney(cost)}.");
 								}
 								catch (NullReferenceException)
 								{

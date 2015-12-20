@@ -39,6 +39,14 @@ namespace CurrencyShop
 		//	return items[0].netID;
 		//}
 
+		public Item GetItem()
+		{
+			Item item = TShock.Utils.GetItemById(netID);
+			if (item == null)
+				throw new InvalidItemException(netID);
+			return item;
+		}
+
 		public string GetName()
 		{
 			Item item = TShock.Utils.GetItemById(netID);
