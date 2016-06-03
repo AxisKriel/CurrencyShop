@@ -13,7 +13,7 @@ using TShockAPI;
 
 namespace CurrencyShop
 {
-	[ApiVersion(1, 22)]
+	[ApiVersion(1, 23)]
 	public class CShop : TerrariaPlugin
 	{
 		public override string Author
@@ -54,7 +54,6 @@ namespace CurrencyShop
 		public CShop(Main game)
 			: base(game)
 		{
-			//Instance = new CShop(game);
 			Order = 2;
 		}
 
