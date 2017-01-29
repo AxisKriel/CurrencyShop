@@ -10,10 +10,11 @@ using MySql.Data.MySqlClient;
 using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
+using Microsoft.Xna.Framework;
 
 namespace CurrencyShop
 {
-	[ApiVersion(1, 23)]
+	[ApiVersion(2, 0)]
 	public class CShop : TerrariaPlugin
 	{
 		public override string Author

@@ -9,6 +9,7 @@ using CurrencyShop.Extensions;
 using Terraria;
 using TShockAPI;
 using static CurrencyShop.CShop;
+using Microsoft.Xna.Framework;
 
 namespace CurrencyShop
 {
