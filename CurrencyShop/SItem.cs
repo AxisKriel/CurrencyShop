@@ -52,7 +52,7 @@ namespace CurrencyShop
 			Item item = TShock.Utils.GetItemById(netID);
 			if (item == null)
 				throw new InvalidItemException(netID);
-			return item.name;
+			return item.Name;
 		}
 
 		public string GetPrefixName()

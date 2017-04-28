@@ -118,14 +118,14 @@ namespace CurrencyShop
 									}
 									else if (stack > realItem.maxStack)
 									{
-										args.Player.SendErrorMessage($"{Tag} You can't buy {stack} {realItem.name} at once.");
+										args.Player.SendErrorMessage($"{Tag} You can't buy {stack} {realItem.Name} at once.");
 										return;
 									}
 
 									if (CShop.Config.UseGiveItemSSC)
 										args.Player.GiveItemSSC(item.netID, stack, item.prefix);
 									else
-										args.Player.GiveItem(item.netID, realItem.name, 2, 3, stack, item.prefix);
+										args.Player.GiveItem(item.netID, realItem.Name, 2, 3, stack, item.prefix);
 
 									await BankMain.Bank.ChangeByAsync(account.AccountName, -cost);
 									BankMain.Log.ItemPurchase(account, new SItem(item.netID, stack, cost, item.prefix));
@@ -410,7 +410,7 @@ namespace CurrencyShop
 							if (items.Count == 1)
 							{
 								// Display all kits containing this item
-								args.Player.SendInfoMessage($"{Tag} Searching for all kits containing the item '{items[0].name}'...");
+								args.Player.SendInfoMessage($"{Tag} Searching for all kits containing the item '{items[0].Name}'...");
 								args.Player.SendKitMatches(await Manager.KitContains(items[0].netID));
 							}
 							else
