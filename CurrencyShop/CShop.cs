@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 
 namespace CurrencyShop
 {
-	[ApiVersion(2, 0)]
+	[ApiVersion(2, 1)]
 	public class CShop : TerrariaPlugin
 	{
 		public override string Author
